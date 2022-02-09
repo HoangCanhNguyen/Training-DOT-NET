@@ -1,0 +1,32 @@
+﻿@model SignupViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Signup";
+    var roles = new List<string>() { "Member", "Admin" };
+}
+
+<h1>Signup</h1>
+<form asp-controller="Identity" asp-action="Signup" method="post">
+    @Html.ValidationSummary()
+
+    <div class="form-group">
+        <label asp-for="Email">Email:</label>
+        <input type="text" asp-for="Email" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password">Password:</label>
+        <input type="text" asp-for="Password" class="form-control"/>
+    </div>
+
+    <div>
+        @Html.DropDownListFor(x => x.Role, roles.Select( s => new SelectListItem {Text = s, Value = s}), "Roles", null)
+    </div>
+
+    <button type="submit">Signup</button>
+</form>
+
+<div class="alert">
+    if you already have an account, please <a asp-action="Signin">Signin</a>
+</div>
